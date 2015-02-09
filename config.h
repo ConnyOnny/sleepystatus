@@ -23,8 +23,8 @@
 #undef WAKEUPON
 #undef PRINTFLINE
 
-#define FUNCNAME mytext
-#define TEXT "bäm⚡"
+#define FUNCNAME sep
+#define TEXT " "
 #include "functions/static_text.c"
 #undef FUNCNAME
 #undef TEXT
@@ -39,8 +39,9 @@
 
 static ptfunc_t writer_thread_functions [] = {
 	battery_status,
+	sep,
 	minute_clock,
-	mytext,
+	sep,
 	second_clock,
 };
 

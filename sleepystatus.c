@@ -61,15 +61,15 @@ void notify_update(size_t id, char const* str) {
 		return;
 	}
 	lazystr_set(buffers+id, str);
-	size_t len = n_writer_thread_functions-1; // spaces in between
+	size_t len = 0;
 	for (size_t i=0; i<n_writer_thread_functions; i++) {
 		len += strlen(buffers[i].data);
 	}
 	lazystr_fitatleast(&output_buffer, len);
-	int pos = sprintf(output_buffer.data, "%s", buffers[0].data);
-	for (size_t i=1; i<n_writer_thread_functions; i++) {
+	int pos = 0;
+	for (size_t i=0; i<n_writer_thread_functions; i++) {
 		/* also adds the separating space */
-		pos += sprintf(output_buffer.data+pos, " %s", buffers[i].data);
+		pos += sprintf(output_buffer.data+pos, "%s", buffers[i].data);
 	}
 	assert(pos <= output_buffer.maxlen);
 	setstatus(output_buffer.data);
