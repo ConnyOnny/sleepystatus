@@ -32,17 +32,24 @@
 #define ACPI_CHARGE_STR    "ac_adapter ACPI0003:00 00000080 00000001"
 #define ACPI_NO_CHARGE_STR "ac_adapter ACPI0003:00 00000080 00000000"
 #define ACPI_STATUS_FILE "/sys/class/power_supply/ADP0/online"
+#define NO_CHARGE_STR ""
 #include "functions/battery_status.c"
 #undef ACPI_CHARGE_STR
 #undef ACPI_NO_CHARGE_STR
 #undef ACPI_STATUS_FILE
+#undef NO_CHARGE_STR
+
+#define ACPI_BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/energy_now"
+#define ACPI_BATTERY_MAXLEVEL_FILE "/sys/class/power_supply/BAT0/energy_full"
+#include "functions/battery_level.c"
+#undef ACPI_BATTERY_LEVEL_FILE
+#undef ACPI_BATTERY_MAXLEVEL_FILE
 
 static ptfunc_t writer_thread_functions [] = {
+	battery_level,
 	battery_status,
 	sep,
 	minute_clock,
-	sep,
-	second_clock,
 };
 
 #endif /*include guard*/
