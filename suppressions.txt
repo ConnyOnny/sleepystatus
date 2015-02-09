@@ -1,0 +1,18 @@
+{
+   localtime_r IS thread safe
+   Helgrind:Race
+   fun:strlen
+   fun:__tzstring
+   fun:__tzfile_compute
+   fun:__tz_convert
+}
+{
+   localtime_r IS thread safe
+   Helgrind:Race
+   fun:__GI_strcmp
+   fun:__tzstring
+   fun:__tzfile_compute
+   fun:__tz_convert
+}
+
+

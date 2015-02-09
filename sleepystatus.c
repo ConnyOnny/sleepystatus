@@ -94,9 +94,10 @@ int main (int argc, char** argv) {
 		exit(3);
 	}
 	atexit(destroy_update_lock);
-	
 	for (size_t i=0; i<n_writer_thread_functions; i++) {
 		lazystr_init(&buffers[i]);
+	}
+	for (size_t i=0; i<n_writer_thread_functions; i++) {
 		rv = pthread_create(&threads[i], NULL, writer_thread_functions[i], (void*)i);
 		if (rv != 0) {
 			// TODO: Error handling
