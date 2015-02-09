@@ -23,9 +23,24 @@
 #undef WAKEUPON
 #undef PRINTFLINE
 
+#define FUNCNAME mytext
+#define TEXT "bäm⚡"
+#include "functions/static_text.c"
+#undef FUNCNAME
+#undef TEXT
+
+#define ACPI_CHARGE_STR    "ac_adapter ACPI0003:00 00000080 00000001"
+#define ACPI_NO_CHARGE_STR "ac_adapter ACPI0003:00 00000080 00000000"
+#define ACPI_STATUS_FILE "/sys/class/power_supply/ADP0/online"
+#include "functions/battery_status.c"
+#undef ACPI_CHARGE_STR
+#undef ACPI_NO_CHARGE_STR
+#undef ACPI_STATUS_FILE
+
 static ptfunc_t writer_thread_functions [] = {
+	battery_status,
 	minute_clock,
-	second_clock,
+	mytext,
 	second_clock,
 };
 
