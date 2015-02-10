@@ -26,7 +26,7 @@ int read_int_from_file(char const* fname) {
 
 void *battery_level (void *arg) {
 	size_t tid = (size_t)arg;
-	// the prefix is there to indicate the max height of the bar
+	// index 8 is only used when the battery is 100% full
 	char *levels[] = {"▕▁▏","▕▂▏","▕▃▏","▕▄▏","▕▅▏","▕▆▏","▕▇▏","▕█▏",""};
 	int lastidx=-1;
 	while (1) {
