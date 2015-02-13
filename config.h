@@ -2,7 +2,7 @@
 #define _CONFIG_H_
 
 #include "defs.h"
-
+/*
 #define FUNCNAME second_clock
 #define BUFSIZE 32
 #define WAKEUPON 0
@@ -22,6 +22,26 @@
 #undef BUFSIZE
 #undef WAKEUPON
 #undef PRINTFLINE
+*/
+#define FUNCNAME my_date_clock
+#define BUFSIZE 32
+#define WAKEUPON 2
+static const char* day_names[] = {"So","Mo","Di","Mi","Do","Fr","Sa"};
+static const char* my_dst_str(int isdst) {
+	if (isdst == 0) { // no dst, "winter time"
+		return "❄";
+	} else if (isdst < 0) { // don't know
+		return "?DST?";
+	} else { // dst, "summer time"
+		return "☀";
+	}
+}
+#define PRINTFLINE(t) snprintf(buf,BUFSIZE,"%s %d.%02d %d:%02d%s",day_names[t.tm_wday],t.tm_mday,t.tm_mon+1,t.tm_hour,t.tm_min,my_dst_str(t.tm_isdst))
+#include "functions/config_clock.c"
+#undef FUNCNAME
+#undef BUFSIZE
+#undef WAKEUPON
+#undef PINTFLINE
 
 #define FUNCNAME sep
 #define TEXT " "
@@ -49,7 +69,7 @@ static ptfunc_t writer_thread_functions [] = {
 	battery_level,
 	battery_status,
 	sep,
-	minute_clock,
+	my_date_clock,
 };
 
 #endif /*include guard*/
