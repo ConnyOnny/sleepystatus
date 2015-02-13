@@ -25,7 +25,7 @@
 */
 #define FUNCNAME my_date_clock
 #define BUFSIZE 32
-#define WAKEUPON 2
+#define WAKEUPON 1
 static const char* day_names[] = {"So","Mo","Di","Mi","Do","Fr","Sa"};
 static const char* my_dst_str(int isdst) {
 	if (isdst == 0) { // no dst, "winter time"
